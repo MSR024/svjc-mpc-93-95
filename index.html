@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>SVJC MPC Batch 1993–95</title>
   <meta name="description" content="SVJC MPC Class of 1993–95 — staying connected, three decades on.">
   <meta property="og:title" content="SVJC MPC Batch 1993–95">
-  <meta property="og:description" content="Staying connected, three decades on.">
-  <meta property="og:image" content="group-photo.jpeg">
+  <meta property="og:description" content="Thirty years on, still one batch.">
+  <meta property="og:image" content="https://www.svjc-mpc-93-95.in/group-photo.jpeg">
+  <meta name="theme-color" content="#fbf7f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#14161b" media="(prefers-color-scheme: dark)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #fbf7f0;
@@ -20,7 +22,8 @@
       --accent: #b4541f;
       --accent-soft: #f3e3d6;
       --line: #e6ddd0;
-      --shadow: 0 18px 40px -18px rgba(31, 36, 48, 0.35);
+      --shadow: 0 14px 32px -16px rgba(31, 36, 48, 0.35);
+      --gap: clamp(8px, 2vh, 20px);
     }
     @media (prefers-color-scheme: dark) {
       :root {
@@ -31,178 +34,214 @@
         --accent: #e98b52;
         --accent-soft: #2d241e;
         --line: #2c3039;
-        --shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.7);
+        --shadow: 0 14px 32px -16px rgba(0, 0, 0, 0.7);
       }
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* Lock the page to exactly one screen: no scrolling */
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+
     body {
       font-family: "Inter", system-ui, sans-serif;
       background: var(--bg);
       color: var(--ink);
-      line-height: 1.6;
-      min-height: 100vh;
+      line-height: 1.4;
+      /* dvh = the visible height on phones, excluding the browser's address bar */
+      height: 100vh;
+      height: 100dvh;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      gap: var(--gap);
+      padding:
+        max(var(--gap), env(safe-area-inset-top))
+        max(16px, env(safe-area-inset-right))
+        max(10px, env(safe-area-inset-bottom))
+        max(16px, env(safe-area-inset-left));
     }
 
-    .wrap { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 20px; }
-
-    /* Header */
-    header { padding: 56px 0 32px; text-align: center; }
+    /* ---------- Header ---------- */
+    header { text-align: center; flex-shrink: 0; }
     .eyebrow {
       display: inline-block;
-      font-size: 0.78rem;
+      font-size: clamp(0.62rem, 1.4vh, 0.78rem);
       font-weight: 600;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--accent);
       background: var(--accent-soft);
-      padding: 6px 14px;
+      padding: 4px 12px;
       border-radius: 999px;
-      margin-bottom: 20px;
+      margin-bottom: clamp(6px, 1.4vh, 14px);
     }
     h1 {
       font-family: "Fraunces", Georgia, serif;
       font-weight: 700;
-      font-size: clamp(2.2rem, 6vw, 3.8rem);
-      line-height: 1.1;
+      /* scales with whichever is tighter: width or height */
+      font-size: clamp(1.5rem, min(7vw, 5.2vh), 3.4rem);
+      line-height: 1.08;
       letter-spacing: -0.01em;
     }
     h1 span { color: var(--accent); }
-    .tagline {
-      margin-top: 14px;
-      font-size: clamp(1rem, 2.4vw, 1.2rem);
-      color: var(--muted);
-    }
 
-    /* Photo */
-    .photo-card {
+    /* ---------- Photo: takes all leftover space ---------- */
+    .photo {
+      flex: 1 1 0;
+      min-height: 0;          /* lets the photo shrink instead of pushing content down */
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo img {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;    /* whole photo always visible, never cropped */
+      padding: clamp(4px, 1vh, 10px);
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 12px;
+      border-radius: 14px;
       box-shadow: var(--shadow);
-    }
-    .photo-card img {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
     }
     .photo-fallback {
       display: none;
-      aspect-ratio: 16 / 9;
-      border-radius: 10px;
+      width: 100%;
+      height: 100%;
+      max-height: 60vh;
       border: 2px dashed var(--line);
+      border-radius: 14px;
       align-items: center;
       justify-content: center;
       text-align: center;
       color: var(--muted);
-      padding: 24px;
+      padding: 16px;
     }
-    .photo-card.missing img { display: none; }
-    .photo-card.missing .photo-fallback { display: flex; }
-    figcaption {
-      text-align: center;
-      font-size: 0.92rem;
-      color: var(--muted);
-      padding: 14px 8px 4px;
-    }
+    .photo.missing img { display: none; }
+    .photo.missing .photo-fallback { display: flex; }
 
-    /* Meet banner */
+    /* ---------- Meet banner ---------- */
     .meet {
-      margin: 40px auto 0;
-      max-width: 640px;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 14px;
       background: var(--surface);
       border: 1px solid var(--line);
       border-left: 4px solid var(--accent);
       border-radius: 12px;
-      padding: 18px 22px;
+      padding: clamp(8px, 1.4vh, 14px) 18px;
+      max-width: 560px;
+      width: 100%;
     }
     .meet-date {
       flex-shrink: 0;
       text-align: center;
-      font-family: "Fraunces", Georgia, serif;
       line-height: 1;
     }
     .meet-date .mon {
-      font-size: 0.8rem;
-      font-family: "Inter", sans-serif;
+      font-size: 0.7rem;
       font-weight: 600;
       letter-spacing: 0.12em;
       color: var(--accent);
     }
-    .meet-date .day { font-size: 2.2rem; font-weight: 700; }
-    .meet h2 { font-size: 1.05rem; font-weight: 600; }
-    .meet p { font-size: 0.95rem; color: var(--muted); }
+    .meet-date .day {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(1.4rem, 3.4vh, 2rem);
+      font-weight: 700;
+    }
+    .meet h2 { font-size: clamp(0.85rem, 1.9vh, 1rem); font-weight: 600; }
+    .meet p  { font-size: clamp(0.75rem, 1.6vh, 0.9rem); color: var(--muted); }
 
-    /* Footer */
+    /* ---------- Footer ---------- */
     footer {
-      margin-top: auto;
-      padding: 48px 0 32px;
-      text-align: center;
-      font-size: 0.85rem;
+      flex-shrink: 0;
+      font-size: clamp(0.65rem, 1.4vh, 0.8rem);
       color: var(--muted);
-    }
-    footer .rule {
-      width: 48px;
-      height: 2px;
-      background: var(--accent);
-      margin: 0 auto 16px;
-      border-radius: 2px;
+      text-align: center;
     }
 
-    @media (max-width: 520px) {
-      header { padding: 40px 0 24px; }
-      .photo-card { padding: 8px; border-radius: 14px; }
-      .meet { flex-direction: column; text-align: center; gap: 10px; }
+    /* ---------- Phones held sideways (wide but short) ----------
+       Stacking would leave the photo tiny, so put text on the left
+       and the photo on the right. */
+    @media (orientation: landscape) and (max-height: 500px) {
+      body {
+        display: grid;
+        grid-template-columns: minmax(200px, 34%) 1fr;
+        grid-template-rows: 1fr auto auto;
+        grid-template-areas:
+          "head  photo"
+          "meet  photo"
+          "foot  photo";
+        align-items: center;
+        column-gap: 20px;
+        row-gap: 10px;
+      }
+      header { grid-area: head; text-align: left; align-self: end; }
+      .photo  { grid-area: photo; height: 100%; }
+      .meet   { grid-area: meet; padding: 8px 12px; }
+      footer  { grid-area: foot; text-align: left; }
+      h1 { font-size: clamp(1.2rem, 4.2vw, 1.9rem); }
+      .meet h2 { font-size: 0.8rem; }
+      .meet p  { display: none; }
+    }
+
+    /* ---------- Tall screens (phones and tablets held upright) ----------
+       The photo is limited by width here, so size it to the screen width
+       and keep heading, photo and meet card together in the middle. */
+    @media (max-aspect-ratio: 3/4) {
+      body { --gap: clamp(14px, 3vh, 30px); }
+      header { margin-top: auto; }
+      .photo { flex: 0 1 auto; }
+      .photo img { width: 100%; max-height: 55vh; max-height: 55dvh; }
+      .meet { margin-bottom: auto; }
+    }
+
+    /* ---------- Very short screens (small phones, split-screen) ---------- */
+    @media (max-height: 560px) and (orientation: portrait) {
+      .meet p { display: none; }
+      footer { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <header class="wrap">
+  <header>
     <div class="eyebrow">SVJC · MPC · 1993–95</div>
     <h1>Thirty years on,<br><span>still one batch.</span></h1>
-    <p class="tagline">Classmates of the SVJC MPC Class of 1993–95, together again.</p>
   </header>
 
-  <main class="wrap">
-    <figure class="photo-card" id="photoCard">
-      <img
-        src="group-photo.jpeg"
-        alt="Group photo of the SVJC MPC Class of 1993–95"
-        onerror="document.getElementById('photoCard').classList.add('missing')">
-      <div class="photo-fallback">
-        Group photo coming soon — add it at <strong>&nbsp;group-photo.jpeg</strong>
-      </div>
-      <figcaption>SVJC MPC Class of 1993–95</figcaption>
-    </figure>
-
-    <section class="meet" aria-label="Upcoming meet">
-      <div class="meet-date">
-        <div class="mon">OCT</div>
-        <div class="day">25</div>
-      </div>
-      <div>
-        <h2>Next batch meet — Sunday, October 25, 2026</h2>
-        <p>The full batch website is on its way. See you there!</p>
-      </div>
-    </section>
+  <main class="photo" id="photo">
+    <img
+      src="group-photo.jpeg"
+      alt="Group photo of the SVJC MPC Class of 1993–95"
+      onerror="document.getElementById('photo').classList.add('missing')">
+    <div class="photo-fallback">Group photo coming soon</div>
   </main>
 
-  <footer class="wrap">
-    <div class="rule"></div>
-    <p>&copy; <span id="yr">2026</span> SVJC MPC Batch 1993–95 · svjc-mpc-93-95.in</p>
+  <section class="meet" aria-label="Upcoming meet">
+    <div class="meet-date">
+      <div class="mon">OCT</div>
+      <div class="day">25</div>
+    </div>
+    <div>
+      <h2>Batch meet · Sunday, Oct 25, 2026</h2>
+      <p>The full batch website is on its way. See you there!</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 SVJC MPC Batch 1993–95 · svjc-mpc-93-95.in
   </footer>
 
-  <script>
-    document.getElementById('yr').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
