@@ -3,97 +3,144 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- Keep the warm light theme even when the phone is in dark mode -->
+  <meta name="color-scheme" content="light only">
+  <meta name="theme-color" content="#fff3dc">
   <title>SVJC MPC Batch 1993–95</title>
-  <meta name="description" content="SVJC MPC Class of 1993–95 — staying connected, three decades on.">
+  <meta name="description" content="SVJC MPC Class of 1993–95 — thirty years on, still connected.">
   <meta property="og:title" content="SVJC MPC Batch 1993–95">
-  <meta property="og:description" content="Thirty years on, still one batch.">
+  <meta property="og:description" content="Thirty years on, still connected.">
   <meta property="og:image" content="https://www.svjc-mpc-93-95.in/group-photo.jpeg">
-  <meta name="theme-color" content="#fbf7f0" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#14161b" media="(prefers-color-scheme: dark)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fbf7f0;
-      --surface: #ffffff;
-      --ink: #1f2430;
-      --muted: #5d6472;
-      --accent: #b4541f;
-      --accent-soft: #f3e3d6;
-      --line: #e6ddd0;
-      --shadow: 0 14px 32px -16px rgba(31, 36, 48, 0.35);
-      --gap: clamp(8px, 2vh, 20px);
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #14161b;
-        --surface: #1d2027;
-        --ink: #f1ece4;
-        --muted: #a8adb8;
-        --accent: #e98b52;
-        --accent-soft: #2d241e;
-        --line: #2c3039;
-        --shadow: 0 14px 32px -16px rgba(0, 0, 0, 0.7);
-      }
+      color-scheme: light only;
+      --cream: #fff8ea;
+      --saffron-soft: #fde2b8;
+      --saffron: #e8871e;
+      --marigold: #f4b400;
+      --maroon: #8b1e2d;
+      --leaf: #2e7d32;
+      --ink: #3b1d14;
+      --muted: #7a5a48;
+      --gold: #d4a234;
+      --card: #fffdf8;
+      --toran-h: 46px;
+      --border-h: 14px;
+      --gap: clamp(10px, 2.2vh, 22px);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     /* Lock the page to exactly one screen: no scrolling */
-    html, body {
-      height: 100%;
-      overflow: hidden;
-      overscroll-behavior: none;
-    }
+    html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
 
     body {
       font-family: "Inter", system-ui, sans-serif;
-      background: var(--bg);
       color: var(--ink);
       line-height: 1.4;
-      /* dvh = the visible height on phones, excluding the browser's address bar */
       height: 100vh;
-      height: 100dvh;
+      height: 100dvh;   /* visible height on phones, excluding the address bar */
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: var(--gap);
       padding:
-        max(var(--gap), env(safe-area-inset-top))
+        calc(var(--toran-h) + env(safe-area-inset-top) + 6px)
         max(16px, env(safe-area-inset-right))
-        max(10px, env(safe-area-inset-bottom))
+        calc(var(--border-h) + env(safe-area-inset-bottom) + 8px)
         max(16px, env(safe-area-inset-left));
+
+      /* Warm saffron glow + faint rangoli flower pattern */
+      background-color: var(--cream);
+      background-image:
+        radial-gradient(ellipse at 50% 0%, rgba(244, 180, 0, 0.22), transparent 60%),
+        radial-gradient(ellipse at 50% 100%, rgba(232, 135, 30, 0.20), transparent 60%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88' viewBox='0 0 88 88'%3E%3Cg fill='none' stroke='%238b1e2d' stroke-opacity='0.09' stroke-width='1.2'%3E%3Cg transform='translate(44 44)'%3E%3Cellipse rx='4' ry='11' cy='-11'/%3E%3Cellipse rx='4' ry='11' cy='-11' transform='rotate(45)'/%3E%3Cellipse rx='4' ry='11' cy='-11' transform='rotate(90)'/%3E%3Cellipse rx='4' ry='11' cy='-11' transform='rotate(135)'/%3E%3Cellipse rx='4' ry='11' cy='-11' transform='rotate(180)'/%3E%3Cellipse rx='4' ry='11' cy='-11' transform='rotate(225)'/%3E%3Cellipse rx='4' ry='11' cy='-11' transform='rotate(270)'/%3E%3Cellipse rx='4' ry='11' cy='-11' transform='rotate(315)'/%3E%3Ccircle r='3'/%3E%3C/g%3E%3C/g%3E%3Cg fill='%23e8871e' fill-opacity='0.14'%3E%3Ccircle cx='0' cy='0' r='2.5'/%3E%3Ccircle cx='88' cy='0' r='2.5'/%3E%3Ccircle cx='0' cy='88' r='2.5'/%3E%3Ccircle cx='88' cy='88' r='2.5'/%3E%3C/g%3E%3C/svg%3E");
     }
 
+    /* ---------- Marigold toran hanging across the top ---------- */
+    .toran {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: calc(var(--toran-h) + env(safe-area-inset-top));
+      background-color: var(--maroon);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='46' viewBox='0 0 56 46'%3E%3Cpath d='M0 4 Q28 12 56 4' stroke='%23d4a234' stroke-width='2' fill='none'/%3E%3Cg%3E%3Cpath d='M8 7 C1 17 3 28 8 37 C13 28 15 17 8 7Z' fill='%232e7d32'/%3E%3Cpath d='M8 9 L8 35' stroke='%23a5d6a7' stroke-width='0.8'/%3E%3C/g%3E%3Cg%3E%3Cpath d='M48 7 C41 17 43 28 48 37 C53 28 55 17 48 7Z' fill='%23388e3c'/%3E%3Cpath d='M48 9 L48 35' stroke='%23a5d6a7' stroke-width='0.8'/%3E%3C/g%3E%3Cline x1='28' y1='8' x2='28' y2='38' stroke='%23d4a234' stroke-width='1'/%3E%3Ccircle cx='28' cy='17' r='8.5' fill='%23e8871e'/%3E%3Ccircle cx='28' cy='17' r='6' fill='%23f4b400'/%3E%3Ccircle cx='28' cy='17' r='2.4' fill='%23e8871e'/%3E%3Ccircle cx='28' cy='34' r='6.5' fill='%23f4b400'/%3E%3Ccircle cx='28' cy='34' r='4.2' fill='%23ffd54f'/%3E%3Ccircle cx='28' cy='34' r='1.8' fill='%23e8871e'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-position: center bottom;
+      background-size: 56px var(--toran-h);
+      box-shadow: 0 4px 10px -4px rgba(59, 29, 20, 0.35);
+      z-index: 2;
+    }
+
+    /* ---------- Saree-style border along the bottom ---------- */
+    .saree-border {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      height: calc(var(--border-h) + env(safe-area-inset-bottom));
+      background-color: var(--maroon);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='14' viewBox='0 0 20 14'%3E%3Crect width='20' height='3' fill='%23d4a234'/%3E%3Cpath d='M0 14 L10 5 L20 14Z' fill='%23f4b400'/%3E%3Cpath d='M5 14 L10 9.5 L15 14Z' fill='%238b1e2d'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-position: center top;
+      background-size: 20px var(--border-h);
+      z-index: 2;
+    }
+
+    /* ---------- Faint mandala behind the heading ---------- */
+    .mandala {
+      position: fixed;
+      top: calc(var(--toran-h) - 9vmin);
+      left: 50%;
+      width: min(130vw, 760px);
+      aspect-ratio: 1;
+      transform: translateX(-50%);
+      opacity: 0.10;
+      pointer-events: none;
+      z-index: 0;
+    }
+    header, .photo, .meet, footer { position: relative; z-index: 1; }
+
     /* ---------- Header ---------- */
-    header { text-align: center; flex-shrink: 0; }
+    header { text-align: center; flex-shrink: 0; width: 100%; }
     .eyebrow {
       display: inline-block;
-      font-size: clamp(0.62rem, 1.4vh, 0.78rem);
+      font-size: clamp(0.66rem, 1.5vh, 0.8rem);
       font-weight: 600;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-soft);
+      color: var(--maroon);
+      background: var(--saffron-soft);
+      border: 1px solid rgba(212, 162, 52, 0.6);
       padding: 4px 12px;
       border-radius: 999px;
-      margin-bottom: clamp(6px, 1.4vh, 14px);
+      margin-bottom: clamp(6px, 1.4vh, 12px);
     }
     h1 {
-      font-family: "Fraunces", Georgia, serif;
-      font-weight: 700;
-      /* scales with whichever is tighter: width or height */
-      font-size: clamp(1.5rem, min(7vw, 5.2vh), 3.4rem);
-      line-height: 1.08;
-      letter-spacing: -0.01em;
+      font-family: "Yatra One", Georgia, serif;
+      font-weight: 400;
+      white-space: nowrap;      /* always one line */
+      width: 100%;
+      overflow: hidden;
+      /* first guess; the small script below shrinks it if it would not fit */
+      font-size: min(6.4vw, 5.6vh, 3.3rem);
+      line-height: 1.2;
+      color: var(--ink);
     }
-    h1 span { color: var(--accent); }
+    h1 span { color: var(--maroon); }
+    .divider {
+      display: block;
+      width: min(180px, 40vw);
+      height: 12px;
+      margin: clamp(4px, 1vh, 8px) auto 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='12' viewBox='0 0 180 12'%3E%3Cpath d='M0 6 H72 M108 6 H180' stroke='%23d4a234' stroke-width='1.5'/%3E%3Cpath d='M90 0 L96 6 L90 12 L84 6Z' fill='%23e8871e'/%3E%3Ccircle cx='78' cy='6' r='2' fill='%238b1e2d'/%3E%3Ccircle cx='102' cy='6' r='2' fill='%238b1e2d'/%3E%3C/svg%3E") center / contain no-repeat;
+    }
 
     /* ---------- Photo: takes all leftover space ---------- */
     .photo {
       flex: 1 1 0;
-      min-height: 0;          /* lets the photo shrink instead of pushing content down */
+      min-height: 0;
       width: 100%;
       max-width: 1100px;
       display: flex;
@@ -106,20 +153,22 @@
       max-height: 100%;
       width: auto;
       height: auto;
-      object-fit: contain;    /* whole photo always visible, never cropped */
-      padding: clamp(4px, 1vh, 10px);
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      box-shadow: var(--shadow);
+      object-fit: contain;      /* whole photo always visible, never cropped */
+      padding: clamp(4px, 0.9vh, 8px);
+      background: var(--card);
+      border: 3px solid var(--gold);
+      outline: 1px solid rgba(139, 30, 45, 0.35);
+      outline-offset: 3px;
+      border-radius: 12px;
+      box-shadow: 0 16px 34px -16px rgba(59, 29, 20, 0.55);
     }
     .photo-fallback {
       display: none;
       width: 100%;
       height: 100%;
-      max-height: 60vh;
-      border: 2px dashed var(--line);
-      border-radius: 14px;
+      max-height: 50vh;
+      border: 2px dashed var(--gold);
+      border-radius: 12px;
       align-items: center;
       justify-content: center;
       text-align: center;
@@ -129,95 +178,94 @@
     .photo.missing img { display: none; }
     .photo.missing .photo-fallback { display: flex; }
 
-    /* ---------- Meet banner ---------- */
+    /* ---------- Meet card ---------- */
     .meet {
       flex-shrink: 0;
       display: flex;
       align-items: center;
       gap: 14px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-left: 4px solid var(--accent);
+      background: var(--card);
+      border: 1px solid rgba(212, 162, 52, 0.7);
+      border-left: 5px solid var(--maroon);
       border-radius: 12px;
-      padding: clamp(8px, 1.4vh, 14px) 18px;
-      max-width: 560px;
+      padding: clamp(8px, 1.4vh, 13px) 16px;
+      max-width: 520px;
       width: 100%;
+      box-shadow: 0 8px 20px -14px rgba(59, 29, 20, 0.5);
     }
-    .meet-date {
-      flex-shrink: 0;
-      text-align: center;
-      line-height: 1;
-    }
+    .meet-date { flex-shrink: 0; text-align: center; line-height: 1; }
     .meet-date .mon {
       font-size: 0.7rem;
       font-weight: 600;
       letter-spacing: 0.12em;
-      color: var(--accent);
+      color: var(--saffron);
     }
     .meet-date .day {
-      font-family: "Fraunces", Georgia, serif;
-      font-size: clamp(1.4rem, 3.4vh, 2rem);
-      font-weight: 700;
+      font-family: "Yatra One", Georgia, serif;
+      font-size: clamp(1.5rem, 3.6vh, 2rem);
+      color: var(--maroon);
     }
-    .meet h2 { font-size: clamp(0.85rem, 1.9vh, 1rem); font-weight: 600; }
-    .meet p  { font-size: clamp(0.75rem, 1.6vh, 0.9rem); color: var(--muted); }
+    .meet h2 { font-size: clamp(0.88rem, 2vh, 1rem); font-weight: 600; }
+    .meet p  { font-size: clamp(0.78rem, 1.7vh, 0.9rem); color: var(--muted); }
 
-    /* ---------- Footer ---------- */
     footer {
       flex-shrink: 0;
-      font-size: clamp(0.65rem, 1.4vh, 0.8rem);
+      font-size: clamp(0.66rem, 1.4vh, 0.78rem);
       color: var(--muted);
       text-align: center;
     }
 
-    /* ---------- Phones held sideways (wide but short) ----------
-       Stacking would leave the photo tiny, so put text on the left
-       and the photo on the right. */
+    /* ---------- Phones & tablets held upright (the main audience) ----------
+       Size the photo to the screen width and keep heading, photo and
+       meet card grouped together in the middle. */
+    @media (max-aspect-ratio: 3/4) {
+      body { --gap: clamp(14px, 2.8vh, 28px); }
+      header { margin-top: auto; }
+      .photo { flex: 0 1 auto; }
+      .photo img { width: 100%; max-height: 52vh; max-height: 52dvh; }
+      .meet { margin-bottom: auto; }
+    }
+
+    /* ---------- Phones held sideways (wide but short) ---------- */
     @media (orientation: landscape) and (max-height: 500px) {
+      :root { --toran-h: 30px; --border-h: 10px; }
       body {
         display: grid;
-        grid-template-columns: minmax(200px, 34%) 1fr;
-        grid-template-rows: 1fr auto auto;
+        grid-template-columns: minmax(200px, 36%) 1fr;
+        grid-template-rows: auto 1fr auto;
         grid-template-areas:
-          "head  photo"
+          "head  head"
           "meet  photo"
           "foot  photo";
         align-items: center;
         column-gap: 20px;
-        row-gap: 10px;
+        row-gap: 8px;
       }
-      header { grid-area: head; text-align: left; align-self: end; }
+      header { grid-area: head; }
+      .eyebrow, .divider { display: none; }
+      h1 { font-size: min(4.2vw, 9vh); }
       .photo  { grid-area: photo; height: 100%; }
-      .meet   { grid-area: meet; padding: 8px 12px; }
-      footer  { grid-area: foot; text-align: left; }
-      h1 { font-size: clamp(1.2rem, 4.2vw, 1.9rem); }
-      .meet h2 { font-size: 0.8rem; }
-      .meet p  { display: none; }
-    }
-
-    /* ---------- Tall screens (phones and tablets held upright) ----------
-       The photo is limited by width here, so size it to the screen width
-       and keep heading, photo and meet card together in the middle. */
-    @media (max-aspect-ratio: 3/4) {
-      body { --gap: clamp(14px, 3vh, 30px); }
-      header { margin-top: auto; }
-      .photo { flex: 0 1 auto; }
-      .photo img { width: 100%; max-height: 55vh; max-height: 55dvh; }
-      .meet { margin-bottom: auto; }
-    }
-
-    /* ---------- Very short screens (small phones, split-screen) ---------- */
-    @media (max-height: 560px) and (orientation: portrait) {
+      .meet   { grid-area: meet; padding: 8px 12px; align-self: end; }
       .meet p { display: none; }
-      footer { display: none; }
+      footer  { grid-area: foot; align-self: start; }
+      .mandala { display: none; }
+    }
+
+    /* ---------- Very short upright screens ---------- */
+    @media (max-height: 580px) and (orientation: portrait) {
+      .meet p, .divider { display: none; }
     }
   </style>
 </head>
 <body>
 
+  <div class="toran" aria-hidden="true"></div>
+  <svg class="mandala" id="mandala" viewBox="-100 -100 200 200" aria-hidden="true"></svg>
+
   <header>
     <div class="eyebrow">SVJC · MPC · 1993–95</div>
-    <h1>Thirty years on,<br><span>still Connected.</span></h1>
+    <h1 id="title">Thirty years on, <span>still connected.</span></h1>
+    <span class="divider" aria-hidden="true"></span>
   </header>
 
   <main class="photo" id="photo">
@@ -235,13 +283,52 @@
     </div>
     <div>
       <h2>Batch meet · Sunday, Oct 25, 2026</h2>
-      <p> Full website is on its way. See you there!</p>
+      <p>The full batch website is on its way. See you there!</p>
     </div>
   </section>
 
-  <footer>
-    &copy; SVJC MPC Batch 1993–95
-  </footer>
+  <footer>&copy; 2026 SVJC MPC Batch 1993–95 · svjc-mpc-93-95.in</footer>
 
+  <div class="saree-border" aria-hidden="true"></div>
+
+  <script>
+    // Draw the background mandala: rings of petals around a centre.
+    (function () {
+      var svg = document.getElementById('mandala'), out = '';
+      var rings = [
+        { n: 24, r: 78, rx: 7,  ry: 16, c: '#8b1e2d' },
+        { n: 16, r: 52, rx: 8,  ry: 18, c: '#e8871e' },
+        { n: 12, r: 28, rx: 6,  ry: 13, c: '#8b1e2d' }
+      ];
+      rings.forEach(function (g) {
+        for (var i = 0; i < g.n; i++) {
+          out += '<ellipse cx="0" cy="' + -g.r + '" rx="' + g.rx + '" ry="' + g.ry +
+                 '" fill="none" stroke="' + g.c + '" stroke-width="1.6" transform="rotate(' +
+                 (360 / g.n) * i + ')"/>';
+        }
+      });
+      out += '<circle r="96" fill="none" stroke="#d4a234" stroke-width="1.5"/>' +
+             '<circle r="64" fill="none" stroke="#d4a234" stroke-width="1"/>' +
+             '<circle r="12" fill="#e8871e"/>';
+      svg.innerHTML = out;
+    })();
+
+    // Keep the headline on one line: shrink it until it fits the screen width.
+    (function () {
+      var h = document.getElementById('title');
+      function fit() {
+        h.style.fontSize = '';
+        var size = parseFloat(getComputedStyle(h).fontSize);
+        while (h.scrollWidth > h.clientWidth && size > 12) {
+          size -= 0.5;
+          h.style.fontSize = size + 'px';
+        }
+      }
+      fit();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+      window.addEventListener('resize', fit);
+      window.addEventListener('orientationchange', fit);
+    })();
+  </script>
 </body>
 </html>
