@@ -6,9 +6,9 @@
   <!-- Keep the warm light theme even when the phone is in dark mode -->
   <meta name="color-scheme" content="light only">
   <meta name="theme-color" content="#fff3dc">
-  <title>SVJC MPC Batch 1993–95</title>
-  <meta name="description" content="SVJC MPC Class of 1993–95 — thirty years on, still connected.">
-  <meta property="og:title" content="SVJC MPC Batch 1993–95">
+  <title>Shathavahana Junior College, Huzurabad · MPC 1993–95</title>
+  <meta name="description" content="Shathavahana Junior College, Huzurabad · MPC Class of 1993–95 — thirty years on, still connected.">
+  <meta property="og:title" content="Shathavahana Junior College, Huzurabad · MPC 1993–95">
   <meta property="og:description" content="Thirty years on, still connected.">
   <meta property="og:image" content="https://www.svjc-mpc-93-95.in/group-photo.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -105,17 +105,29 @@
     /* ---------- Header ---------- */
     header { text-align: center; flex-shrink: 0; width: 100%; }
     .eyebrow {
-      display: inline-block;
-      font-size: clamp(0.66rem, 1.5vh, 0.8rem);
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      column-gap: 0.45em;
+      max-width: 100%;
+      font-size: clamp(0.72rem, 1.7vh, 0.9rem);
       font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      line-height: 1.35;
       color: var(--maroon);
       background: var(--saffron-soft);
       border: 1px solid rgba(212, 162, 52, 0.6);
-      padding: 4px 12px;
+      padding: 5px 14px;
       border-radius: 999px;
       margin-bottom: clamp(6px, 1.4vh, 12px);
+    }
+    .eyebrow .batch { color: var(--saffron); white-space: nowrap; letter-spacing: 0.08em; }
+    .eyebrow .sep { color: var(--gold); }
+    /* Narrow phones: college name on line 1, "MPC · 1993–95" on line 2 */
+    @media (max-width: 600px) {
+      .eyebrow { flex-direction: column; border-radius: 16px; padding: 6px 14px; }
+      .eyebrow .sep { display: none; }
     }
     h1 {
       font-family: "Yatra One", Georgia, serif;
@@ -242,7 +254,8 @@
         row-gap: 8px;
       }
       header { grid-area: head; }
-      .eyebrow, .divider { display: none; }
+      .divider { display: none; }
+      .eyebrow { font-size: 0.72rem; padding: 3px 12px; margin-bottom: 4px; }
       h1 { font-size: min(4.2vw, 9vh); }
       .photo  { grid-area: photo; height: 100%; }
       .meet   { grid-area: meet; padding: 8px 12px; align-self: end; }
@@ -263,7 +276,7 @@
   <svg class="mandala" id="mandala" viewBox="-100 -100 200 200" aria-hidden="true"></svg>
 
   <header>
-    <div class="eyebrow">SVJC · MPC · 1993–95</div>
+    <div class="eyebrow"><span class="college">Shathavahana Junior College, Huzurabad</span><span class="sep" aria-hidden="true">·</span><span class="batch">MPC · 1993–95</span></div>
     <h1 id="title">Thirty years on, <span>still connected.</span></h1>
     <span class="divider" aria-hidden="true"></span>
   </header>
@@ -271,7 +284,7 @@
   <main class="photo" id="photo">
     <img
       src="group-photo.jpeg"
-      alt="Group photo of the SVJC MPC Class of 1993–95"
+      alt="Group photo of the Shathavahana Junior College MPC Class of 1993–95"
       onerror="document.getElementById('photo').classList.add('missing')">
     <div class="photo-fallback">Group photo coming soon</div>
   </main>
@@ -287,7 +300,7 @@
     </div>
   </section>
 
-  <footer>&copy; 2026 SVJC MPC Batch 1993–95 · svjc-mpc-93-95.in</footer>
+  <footer>&copy; 2026 MPC Batch 1993–95 · svjc-mpc-93-95.in</footer>
 
   <div class="saree-border" aria-hidden="true"></div>
 
