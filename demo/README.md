@@ -21,3 +21,6 @@ Copy an entry in `classmates.json`:
 - Living outside Telangana: `"location": "outside"`, `"area": "Outside Telangana"`, no `lat`/`lng`.
 - Optional `"link": "https://..."` (LinkedIn etc.) shows a Profile button.
 - Only add people who have agreed to be listed.
+
+## Publishing changes
+`index.html` loads `styles.css?v=…` and `app.js?v=…`. After changing either file, bump the `v=` number (e.g. to the current date-time) so phones fetch the new copy instead of a cached one. `classmates.json` is always fetched fresh.
