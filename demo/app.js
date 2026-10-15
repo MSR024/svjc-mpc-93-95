@@ -315,7 +315,7 @@ function cardHtml(p) {
            class="shrink-0 text-[11px] font-medium rounded-full border border-slate-200 px-2.5 py-1 text-brand-600 hover:bg-brand-50 transition">Profile ↗</a>` : ''}
       </div>
       <div class="mt-1 flex items-center gap-1.5 min-w-0">
-        ${state.prof === 'All' ? `<span class="shrink-0">${badge(p)}</span>` : ''}
+        ${state.prof === 'All' && p.work !== p.profession ? `<span class="shrink-0">${badge(p)}</span>` : ''}
         <p class="min-w-0 text-[11px] text-slate-500 truncate">${out ? '✈ ' : '📍 '}${esc(p.city)}</p>
       </div>
     </article>
