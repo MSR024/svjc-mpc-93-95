@@ -23,7 +23,8 @@ const CONFIG = {
   },
   // Classmates living outside Telangana have no pin; they are listed under this area.
   outsideArea: 'Outside Telangana',
-  areas: ['Hyderabad', 'Karimnagar – Huzurabad', 'Warangal', 'Rest of Telangana', 'Outside Telangana'],
+  // Area filter: built from each friend's town in classmates.json (alphabetical). Add fixed entries here if wanted.
+  areas: [],
   professions: [
     { name: 'Engineering & IT',            color: '#4285F4' },  // blue
     { name: 'Medicine & Health',           color: '#EA4335' },  // red
@@ -33,6 +34,7 @@ const CONFIG = {
     { name: 'Banking & Finance',           color: '#A142F4' },  // purple
     { name: 'Law',                         color: '#795548' },  // brown
     { name: 'Agriculture',                 color: '#7CB342' },  // leaf green
+    { name: 'Science & Geoscience',        color: '#E52592' },  // pink
     { name: 'Other',                       color: '#5F6368' }   // grey
   ]
 };
@@ -85,7 +87,7 @@ function popupHtml(p) {
     <p class="font-bold text-[15px] leading-snug">${esc(p.name)}${sampleTag(p)}</p>
     <p class="text-xs text-slate-600 mb-1.5">${esc(p.work)}</p>
     <div class="mb-2">${badge(p)}</div>
-    <p class="text-xs leading-snug"><span class="text-slate-500">City:</span> ${esc(p.city)}</p>
+    <p class="text-xs leading-snug"><span class="text-slate-500">Area:</span> ${esc(p.city)}</p>
     ${link ? `<a href="${esc(link)}" target="_blank" rel="noopener noreferrer"
        class="mt-2 inline-block text-xs font-medium !text-white rounded-full px-3 py-1.5 no-underline hover:opacity-90" style="background:#8b1e2d">Profile →</a>` : ''}
   </div>`;
@@ -215,9 +217,9 @@ function renderLegend() {
 }
 function populateAreas() {
   const fromData = state.people.map(p => p.area).filter(Boolean);
-  const areas = [...new Set([...CONFIG.areas, ...fromData])];
+  const areas = [...new Set([...CONFIG.areas, ...[...new Set(fromData)].sort()])];
   const n = (a) => state.people.filter(p => p.area === a).length;
-  $('#area').innerHTML = `<option value="All">All areas (${state.people.length})</option>` +
+  $('#area').innerHTML = `<option value="All">All towns (${state.people.length})</option>` +
     areas.map(a => `<option value="${esc(a)}">${esc(a)} (${n(a)})</option>`).join('');
 }
 
@@ -228,7 +230,7 @@ function setDrawer(open) {
 }
 function updatePeek() {
   const open = $('#app').classList.contains('drawer-open');
-  $('#peekText').textContent = open ? 'Show map ▼' : `Browse ${state.people.filter(matches).length} classmates ▲`;
+  $('#peekText').textContent = open ? 'Show map ▼' : `Browse ${state.people.filter(matches).length} friends ▲`;
 }
 
 /* ===================== map ===================== */
@@ -279,7 +281,7 @@ function matches(p) {
 }
 
 function render(fit = false) {
-  const visible = state.people.filter(matches).sort((a, b) => a.name.localeCompare(b.name));
+  const visible = state.people.filter(matches).sort((a, b) => (a.no ?? 1e9) - (b.no ?? 1e9) || a.name.localeCompare(b.name));
   layer.clearLayers();
   visible.forEach(p => markers.get(p.id)?.addTo(layer));
 
@@ -288,10 +290,10 @@ function render(fit = false) {
   ctl.textContent = `✈ ${outN} outside Telangana`;
   ctl.style.display = outN && state.area !== CONFIG.outsideArea ? '' : 'none';
 
-  $('#count').textContent = `${visible.length} of ${state.people.length} classmates`;
+  $('#count').textContent = `${visible.length} of ${state.people.length} friends`;
   updatePeek();
   $('#list').innerHTML = visible.length ? visible.map(cardHtml).join('') :
-    `<li class="text-sm text-slate-500 text-center py-10">No classmates match.<br><button type="button" id="reset" class="mt-2 text-brand-600 font-medium hover:underline">Clear filters</button></li>`;
+    `<li class="text-sm text-slate-500 text-center py-10">No friends match.<br><button type="button" id="reset" class="mt-2 text-brand-600 font-medium hover:underline">Clear filters</button></li>`;
   $('#reset')?.addEventListener('click', resetFilters);
 
   const pts = visible.filter(p => !isOutside(p)).map(p => [p._lat, p._lng]);
@@ -306,7 +308,7 @@ function cardHtml(p) {
              style="--c:${c}; border-left:4px solid ${c}" data-id="${esc(p.id)}" ${out ? '' : `tabindex="0" role="button" aria-label="Show ${esc(p.name)} on map"`}>
       <div class="flex items-start justify-between gap-2">
         <div class="min-w-0">
-          <h2 class="font-semibold text-sm leading-snug">${esc(p.name)}${sampleTag(p)}</h2>
+          <h2 class="font-semibold text-sm leading-snug">${p.no ? `<span class="text-slate-400 font-medium">${esc(p.no)}.</span> ` : ''}${esc(p.name)}${sampleTag(p)}</h2>
           <p class="text-[11.5px] text-slate-600 truncate">${esc(p.work)}</p>
         </div>
         ${link ? `<a href="${esc(link)}" target="_blank" rel="noopener noreferrer" data-site
@@ -362,7 +364,7 @@ $('#list').addEventListener('keydown', (e) => {
     if (!res.ok) throw new Error(res.status);
     state.people = await res.json();
   } catch (err) {
-    $('#list').innerHTML = `<li class="text-sm text-red-600 p-4">Could not load the classmates list. Please refresh the page.</li>`;
+    $('#list').innerHTML = `<li class="text-sm text-red-600 p-4">Could not load the friends list. Please refresh the page.</li>`;
     console.error(err);
     setupMap();
     return;
