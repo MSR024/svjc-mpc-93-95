@@ -5,6 +5,7 @@ Map + directory of friends (adapted from SacramentoIndians.org). Live at https:/
 ## Files
 - `index.html` — page layout (no inline scripts; a Content-Security-Policy `<meta>` tag blocks injected code, since GitHub Pages can't send security headers).
 - `app.js` — all logic. Meet date/venue, map limits (Telangana), professions and areas live in the `CONFIG` block at the top.
+- `meet.json` — reunion date, time and venue shown in the top banner (loaded fresh every visit).
 - `classmates.json` — the data: Friends Directory v1.0 (12 friends, Oct 14, 2026). `no` keeps the master list's serial numbers; `name`, `work` (profession) and `city` (area) are copied exactly from the master list; `profession` is only the filter group; `area` is the town used for the town filter and pin.
 - `styles.css` — pre-built Tailwind classes. `tailwind.config.js` + `src/tailwind.css` rebuild it:
   `npx tailwindcss@3 -c tailwind.config.js -i src/tailwind.css -o styles.css --minify`
@@ -23,4 +24,4 @@ Copy an entry in `classmates.json`:
 - Only add people who have agreed to be listed.
 
 ## Publishing changes
-`index.html` loads `styles.css?v=…` and `app.js?v=…`. After changing either file, bump the `v=` number (e.g. to the current date-time) so phones fetch the new copy instead of a cached one. `classmates.json` is always fetched fresh.
+`index.html` loads `styles.css?v=…` and `app.js?v=…`. After changing either file, bump the `v=` number (e.g. to the current date-time) so phones fetch the new copy instead of a cached one. `classmates.json` and `meet.json` are always fetched fresh, so friend and banner updates appear immediately.

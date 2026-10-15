@@ -178,5 +178,17 @@
   "lat": 18.2008,
   "lng": 79.418,
   "location": "city"
+ },
+ {
+  "no": 16,
+  "id": "f16",
+  "name": "Srinivas Kandakatla",
+  "work": "IT Professional (Senior manager, Oracle)",
+  "city": "Nizampet Hyderabad",
+  "profession": "Engineering & IT",
+  "area": "Hyderabad",
+  "lat": 17.516,
+  "lng": 78.386,
+  "location": "city"
  }
 ]

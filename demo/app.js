@@ -14,6 +14,9 @@ const CONFIG = {
     bounds: [[15.75, 77.15], [19.98, 81.40]],
     minZoom: 6.5
   },
+  // Meet details: edit meet.json (always loaded fresh, so phones see changes at once).
+  // These values are only a fallback if meet.json can't be loaded.
+  meetUrl: 'meet.json',
   meet: {
     date: '2026-10-25',
     title: 'Batch Meet · MPC 1993–95',
@@ -100,8 +103,7 @@ const markers = new Map();
 let map, layer, outsideCtl;
 
 /* ===================== meet banner ===================== */
-function setupBanner() {
-  const m = CONFIG.meet;
+function setupBanner(m = CONFIG.meet) {
   const d = new Date(m.date + 'T12:00:00+05:30');
   const fmt = (o) => new Intl.DateTimeFormat('en-GB', { timeZone: m.timeZone, ...o }).format(d);
   $('#evDow').textContent = fmt({ weekday: 'short' });
@@ -362,6 +364,8 @@ $('#list').addEventListener('keydown', (e) => {
 /* ===================== boot ===================== */
 (async function init() {
   setupChrome();
+  fetch(CONFIG.meetUrl, { cache: 'no-cache' }).then(r => r.ok ? r.json() : null)
+    .then(j => { if (j) setupBanner({ ...CONFIG.meet, ...j }); }).catch(() => {});
   try {
     const res = await fetch(CONFIG.dataUrl, { cache: 'no-cache' });
     if (!res.ok) throw new Error(res.status);
