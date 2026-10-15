@@ -190,5 +190,17 @@
   "lat": 17.516,
   "lng": 78.386,
   "location": "city"
+ },
+ {
+  "no": 17,
+  "id": "f17",
+  "name": "Venugopal Reddy Bhoompally",
+  "work": "IT Professional",
+  "city": "Alwal,Hyderabad",
+  "profession": "Engineering & IT",
+  "area": "Hyderabad",
+  "lat": 17.502,
+  "lng": 78.51,
+  "location": "city"
  }
 ]
