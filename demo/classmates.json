@@ -142,5 +142,17 @@
   "lat": 18.0072,
   "lng": 79.5583,
   "location": "city"
+ },
+ {
+  "no": 13,
+  "id": "f13",
+  "name": "Ramneni Sreekanth",
+  "work": "Business",
+  "city": "Balapur, Hyderabad",
+  "profession": "Business",
+  "area": "Hyderabad",
+  "lat": 17.308,
+  "lng": 78.496,
+  "location": "city"
  }
 ]
