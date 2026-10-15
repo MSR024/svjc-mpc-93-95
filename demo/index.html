@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="vendor/leaflet-1.9.4/leaflet.css" />
   <link rel="preload" href="fonts/roboto-latin.woff" as="font" type="font/woff" crossorigin />
   <!-- Pre-built Tailwind styles (see tailwind.config.js and README.md). -->
-  <link rel="stylesheet" href="styles.css?v=202610142331" />
+  <link rel="stylesheet" href="styles.css?v=202610142338" />
 
   <style>
     @font-face {
@@ -104,7 +104,8 @@
     </div>
     <div class="min-w-0 flex-1">
       <p class="truncate leading-tight"><strong id="evTitle" class="text-[14px] md:text-[16px] font-black tracking-tight"></strong></p>
-      <p id="evLine" class="truncate text-[11.5px] md:text-[12.5px] text-amber-100/90 leading-tight mt-0.5"></p>
+      <p id="evLine" class="hidden md:block truncate text-[12.5px] text-amber-100/90 leading-tight mt-0.5"></p>
+      <p id="evLineShort" class="md:hidden truncate text-[11.5px] text-amber-100/90 leading-tight mt-0.5"></p>
     </div>
     <span id="evCountdown" class="hidden sm:inline-block shrink-0 rounded-full bg-white/10 border border-white/25 text-[11px] md:text-xs font-semibold px-2.5 py-1"></span>
     <button type="button" data-open="addModal"
@@ -211,6 +212,6 @@
   </div>
 
   <script src="vendor/leaflet-1.9.4/leaflet.js"></script>
-  <script src="app.js?v=202610142331"></script>
+  <script src="app.js?v=202610142338"></script>
 </body>
 </html>

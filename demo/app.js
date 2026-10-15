@@ -17,8 +17,9 @@ const CONFIG = {
   meet: {
     date: '2026-10-25',
     title: 'Batch Meet · MPC 1993–95',
-    time: '',                                  // e.g. '10:00 AM'
-    venue: 'Venue to be announced',
+    time: '10:00 AM',
+    venue: 'Food on Fire, Kishanpura, Hanamkonda',
+    venueShort: 'Food on Fire, Kishanpura',     // phones (fits one line)
     timeZone: 'Asia/Kolkata'
   },
   // Classmates living outside Telangana have no pin; they are listed under this area.
@@ -107,6 +108,8 @@ function setupBanner() {
   $('#evDay').textContent = fmt({ day: 'numeric' });
   $('#evMon').textContent = fmt({ month: 'short' });
   $('#evTitle').textContent = m.title;
+  // Phones: the date is already in the date block, so show just time and venue.
+  $('#evLineShort').textContent = [m.time, m.venueShort || m.venue].filter(Boolean).join(' · ');
   $('#evLine').textContent = [(fmt({ weekday: 'long' }) + ', ' + fmt({ day: 'numeric', month: 'long', year: 'numeric' })) + (m.time ? ', ' + m.time : ''), m.venue].filter(Boolean).join('  ·  ');
   // Countdown counted in India time.
   const today = new Intl.DateTimeFormat('en-CA', { timeZone: m.timeZone }).format(new Date());

@@ -9,3 +9,4 @@
 .bg-\[\#1f8f4e\]{background-color:#1f8f4e}.hover\:bg-\[\#16733e\]:hover{background-color:#16733e}
 .hover\:bg-amber-50:hover{background-color:#fffbeb}
 @media (min-width:768px){.md\:text-\[11px\]{font-size:11px}.md\:text-\[12\.5px\]{font-size:12.5px}.md\:text-\[26px\]{font-size:26px}}
+.text-\[12\.5px\]{font-size:12.5px}
