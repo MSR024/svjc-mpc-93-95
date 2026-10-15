@@ -149,24 +149,37 @@
       background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='12' viewBox='0 0 180 12'%3E%3Cpath d='M0 6 H72 M108 6 H180' stroke='%23d4a234' stroke-width='1.5'/%3E%3Cpath d='M90 0 L96 6 L90 12 L84 6Z' fill='%23e8871e'/%3E%3Ccircle cx='78' cy='6' r='2' fill='%238b1e2d'/%3E%3Ccircle cx='102' cy='6' r='2' fill='%238b1e2d'/%3E%3C/svg%3E") center / contain no-repeat;
     }
 
-    /* ---------- Photo: takes all leftover space ---------- */
+    /* ---------- Photos: two framed pictures share the leftover space ---------- */
     .photo {
       flex: 1 1 0;
       min-height: 0;
       width: 100%;
-      max-width: 1100px;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: row;          /* side by side */
+      align-items: center;
+      justify-content: center;
+      gap: clamp(10px, 2vw, 24px);
+    }
+    /* Each picture's share of the width follows its shape (width / height),
+       so both photos end up the same height. */
+    .shot {
+      flex: var(--ratio) 1 0;
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .photo img {
+    .shot img {
       display: block;
       max-width: 100%;
       max-height: 100%;
       width: auto;
       height: auto;
       object-fit: contain;      /* whole photo always visible, never cropped */
-      padding: clamp(4px, 0.9vh, 8px);
+      padding: clamp(3px, 0.8vh, 7px);
       background: var(--card);
       border: 3px solid var(--gold);
       outline: 1px solid rgba(139, 30, 45, 0.35);
@@ -174,21 +187,6 @@
       border-radius: 12px;
       box-shadow: 0 16px 34px -16px rgba(59, 29, 20, 0.55);
     }
-    .photo-fallback {
-      display: none;
-      width: 100%;
-      height: 100%;
-      max-height: 50vh;
-      border: 2px dashed var(--gold);
-      border-radius: 12px;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: var(--muted);
-      padding: 16px;
-    }
-    .photo.missing img { display: none; }
-    .photo.missing .photo-fallback { display: flex; }
 
     /* ---------- Meet card ---------- */
     .meet {
@@ -233,8 +231,8 @@
     @media (max-aspect-ratio: 3/4) {
       body { --gap: clamp(14px, 2.8vh, 28px); }
       header { margin-top: auto; }
-      .photo { flex: 0 1 auto; }
-      .photo img { width: 100%; max-height: 52vh; max-height: 52dvh; }
+      .photo { flex-direction: column; gap: clamp(10px, 1.8vh, 18px); }
+      .shot  { flex: var(--ratio-v) 1 0; height: auto; width: 100%; }
       .meet { margin-bottom: auto; }
     }
 
@@ -281,12 +279,18 @@
     <span class="divider" aria-hidden="true"></span>
   </header>
 
-  <main class="photo" id="photo">
-    <img
-      src="group-photo.jpeg"
-      alt="Group photo of the Shathavahana Junior College MPC Class of 1993–95"
-      onerror="document.getElementById('photo').classList.add('missing')">
-    <div class="photo-fallback">Group photo coming soon</div>
+  <main class="photo" aria-label="Batch photos">
+    <!-- --ratio = width/height, --ratio-v = height/width (used when stacked) -->
+    <figure class="shot" style="--ratio:1; --ratio-v:1">
+      <img src="group-photo.jpeg" width="1600" height="1600"
+           alt="Group photo of the Shathavahana Junior College MPC Class of 1993–95 at a temple"
+           onerror="this.parentNode.style.display='none'">
+    </figure>
+    <figure class="shot" style="--ratio:1.435; --ratio-v:0.697">
+      <img src="group-photo-2.jpeg" width="1600" height="1115"
+           alt="MPC 1993–95 classmates together on a rooftop in Huzurabad"
+           onerror="this.parentNode.style.display='none'">
+    </figure>
   </main>
 
   <section class="meet" aria-label="Upcoming meet">
