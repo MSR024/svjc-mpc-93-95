@@ -166,5 +166,17 @@
   "lat": 17.4401,
   "lng": 78.3489,
   "location": "city"
+ },
+ {
+  "no": 15,
+  "id": "f15",
+  "name": "D. Leela",
+  "work": "IT Professional, USA",
+  "city": "Petrol Pump, Huzurabad",
+  "profession": "Engineering & IT",
+  "area": "Huzurabad",
+  "lat": 18.2008,
+  "lng": 79.418,
+  "location": "city"
  }
 ]
