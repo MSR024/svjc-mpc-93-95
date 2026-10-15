@@ -308,7 +308,7 @@ function cardHtml(p) {
              style="--c:${c}; border-left:4px solid ${c}" data-id="${esc(p.id)}" ${out ? '' : `tabindex="0" role="button" aria-label="Show ${esc(p.name)} on map"`}>
       <div class="flex items-start justify-between gap-2">
         <div class="min-w-0">
-          <h2 class="font-semibold text-sm leading-snug">${p.no ? `<span class="text-slate-400 font-medium">${esc(p.no)}.</span> ` : ''}${esc(p.name)}${sampleTag(p)}</h2>
+          <h2 class="font-semibold text-sm leading-snug">${esc(p.name)}${sampleTag(p)}</h2>
           <p class="text-[11.5px] text-slate-600 truncate">${esc(p.work)}</p>
         </div>
         ${link ? `<a href="${esc(link)}" target="_blank" rel="noopener noreferrer" data-site
