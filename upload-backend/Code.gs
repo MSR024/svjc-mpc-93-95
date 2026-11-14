@@ -68,7 +68,7 @@ function init_(req) {
     muteHttpExceptions: true
   });
   const url = header_(res, 'Location');
-  if (res.getResponseCode() !== 200 || !url) return { ok: false, error: 'Could not start upload (' + res.getResponseCode() + ').' };
+  if (res.getResponseCode() !== 200 || !url) return { ok: false, error: 'Could not start upload (' + res.getResponseCode() + '): ' + googleReason_(res) };
   if (url.indexOf(UPLOAD) !== 0) return { ok: false, error: 'Unexpected upload address.' };
   return { ok: true, url: url };
 }
@@ -148,8 +148,14 @@ function createFolder_(name, parent) {
     headers: { Authorization: 'Bearer ' + ScriptApp.getOAuthToken() },
     payload: JSON.stringify(meta), muteHttpExceptions: true
   });
-  if (res.getResponseCode() !== 200) throw new Error('Could not create folder (' + res.getResponseCode() + ')');
+  if (res.getResponseCode() !== 200) throw new Error('Could not create folder (' + res.getResponseCode() + '): ' + googleReason_(res));
   return JSON.parse(res.getContentText()).id;
+}
+
+/** Google's own short explanation of an error, e.g. "Google Drive API has not been used in project … or it is disabled". */
+function googleReason_(res) {
+  try { const e = JSON.parse(res.getContentText()).error; return (e && (e.message || e.status)) || ''; }
+  catch (_) { return String(res.getContentText()).slice(0, 200); }
 }
 
 function checkUrl_(u) {
