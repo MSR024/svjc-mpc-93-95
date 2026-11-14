@@ -149,12 +149,12 @@
       background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='12' viewBox='0 0 180 12'%3E%3Cpath d='M0 6 H72 M108 6 H180' stroke='%23d4a234' stroke-width='1.5'/%3E%3Cpath d='M90 0 L96 6 L90 12 L84 6Z' fill='%23e8871e'/%3E%3Ccircle cx='78' cy='6' r='2' fill='%238b1e2d'/%3E%3Ccircle cx='102' cy='6' r='2' fill='%238b1e2d'/%3E%3C/svg%3E") center / contain no-repeat;
     }
 
-    /* ---------- Photos: two framed pictures share the leftover space ---------- */
+    /* ---------- Photos: three framed pictures share the leftover space ---------- */
     .photo {
       flex: 1 1 0;
       min-height: 0;
       width: 100%;
-      max-width: 1200px;
+      max-width: 1600px;
       display: flex;
       flex-direction: row;          /* side by side */
       align-items: center;
@@ -231,8 +231,13 @@
     @media (max-aspect-ratio: 3/4) {
       body { --gap: clamp(14px, 2.8vh, 28px); }
       header { margin-top: auto; }
-      .photo { flex-direction: column; gap: clamp(10px, 1.8vh, 18px); }
-      .shot  { flex: var(--ratio-v) 1 0; height: auto; width: 100%; }
+      /* Newest photo full width on top; the two old ones side by side below. */
+      .photo { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; align-content: center;
+               grid-template-areas: "now now" "then1 then2"; gap: clamp(8px, 1.6vh, 16px); align-items: end; }
+      .shot  { height: auto; width: 100%; }
+      .shot.now img   { max-height: 34vh; max-height: 34dvh; }    /* sizes keep everything on one screen */
+      .shot.then1 img, .shot.then2 img { max-height: 23vh; max-height: 23dvh; }
+      .shot.now { grid-area: now; } .shot.then1 { grid-area: then1; } .shot.then2 { grid-area: then2; }
       .meet { margin-bottom: auto; }
     }
 
@@ -281,14 +286,19 @@
 
   <main class="photo" aria-label="Batch photos">
     <!-- --ratio = width/height, --ratio-v = height/width (used when stacked) -->
-    <figure class="shot" style="--ratio:1; --ratio-v:1">
+    <figure class="shot then1" style="--ratio:1; --ratio-v:1">
       <img src="group-photo.jpeg" width="1600" height="1600"
            alt="Group photo of the Shathavahana Junior College MPC Class of 1993–95 at a temple"
            onerror="this.parentNode.style.display='none'">
     </figure>
-    <figure class="shot" style="--ratio:1.435; --ratio-v:0.697">
+    <figure class="shot then2" style="--ratio:1.435; --ratio-v:0.697">
       <img src="group-photo-2.jpeg" width="1600" height="1115"
            alt="MPC 1993–95 classmates together on a rooftop in Huzurabad"
+           onerror="this.parentNode.style.display='none'">
+    </figure>
+    <figure class="shot now" style="--ratio:2.036; --ratio-v:0.491">
+      <img src="group-photo-3.jpeg" width="1140" height="560"
+           alt="MPC 1993–95 classmates at the reunion on 25 October 2026 in Hanamkonda"
            onerror="this.parentNode.style.display='none'">
     </figure>
   </main>
