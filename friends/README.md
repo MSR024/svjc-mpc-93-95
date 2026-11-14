@@ -1,6 +1,6 @@
-# /demo — MPC 1993–95 Friends Directory
+# /friends — MPC 1993–95 Friends Directory
 
-Map + directory of friends (adapted from SacramentoIndians.org). Live at https://www.svjc-mpc-93-95.in/demo/
+Map + directory of friends (adapted from SacramentoIndians.org). Live at https://www.svjc-mpc-93-95.in/friends/ (old address /demo/ redirects here)
 
 ## Files
 - `index.html` — page layout (no inline scripts; a Content-Security-Policy `<meta>` tag blocks injected code, since GitHub Pages can't send security headers).
