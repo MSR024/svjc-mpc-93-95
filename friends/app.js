@@ -130,6 +130,14 @@ function setupChrome() {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModals(); });
 
   $('#profSelect').innerHTML = CONFIG.professions.map(p => `<option>${esc(p.name)}</option>`).join('');
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.querySelectorAll('select[data-days]').forEach(s => { s.innerHTML = '<option value="">Day</option>' + Array.from({ length: 31 }, (_, i) => `<option>${i + 1}</option>`).join(''); });
+  document.querySelectorAll('select[data-months]').forEach(s => { s.innerHTML = '<option value="">Month</option>' + MONTHS.map(m => `<option>${m}</option>`).join(''); });
+  const dateLine = (label, d, m) => (d && m) ? `${label}: ${d} ${m}` : '';
+
+  // /friends/#add (e.g. from the Wish your Friend page) opens the form straight away.
+  const openFromHash = () => { if (location.hash === '#add') openModal('addModal'); };
+  window.addEventListener('hashchange', openFromHash); openFromHash();
 
   // No server on GitHub Pages: the details are sent to the batch over WhatsApp, or copied.
   $('#addForm').addEventListener('submit', async (e) => {
@@ -143,7 +151,8 @@ function setupChrome() {
     const text = ['MPC 1993–95 batch map: please add / update me',
       'Name: ' + data.get('name'), 'Profession: ' + data.get('profession'),
       data.get('work') ? 'Work: ' + data.get('work') : '', 'City: ' + data.get('city'),
-      data.get('notes') ? 'Notes: ' + data.get('notes') : '', 'I agree to my name, profession and city being shown on the batch map.']
+      dateLine('Birthday', data.get('bday_d'), data.get('bday_m')), dateLine('Wedding anniversary', data.get('anniv_d'), data.get('anniv_m')),
+      data.get('notes') ? 'Notes: ' + data.get('notes') : '', 'I agree to my name, profession, city and any dates I give being shown on the batch website.']
       .filter(Boolean).join('\n');
     if ((e.submitter && e.submitter.dataset.via) === 'copy') {
       try { await navigator.clipboard.writeText(text); status.className = 'text-xs text-center text-emerald-600'; status.textContent = 'Copied! Paste it in the batch WhatsApp group.'; }

@@ -199,7 +199,7 @@
       border-left: 5px solid var(--maroon);
       border-radius: 12px;
       padding: clamp(8px, 1.4vh, 13px) 16px;
-      max-width: 680px;
+      max-width: 860px;
       width: 100%;
       box-shadow: 0 8px 20px -14px rgba(59, 29, 20, 0.5);
     }
@@ -223,12 +223,14 @@
       border-radius: 999px; padding: 8px 14px; box-shadow: 0 6px 14px -8px rgba(139, 30, 45, 0.8); }
     .meet-cta:hover, .meet-cta:focus-visible { background: #6e1424; }
     .meet-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .meet-cta .sm { display: none; }
     .meet-cta.alt { background: #fff; color: var(--maroon); border: 1.5px solid var(--maroon); box-shadow: none; padding: 6.5px 12.5px; }
     .meet-cta.alt:hover, .meet-cta.alt:focus-visible { background: #fbedef; }
     /* Narrow screens and sideways phones: button on its own row under the text. */
     @media (max-width: 600px), (orientation: landscape) and (max-height: 500px) {
       .meet { flex-wrap: wrap; row-gap: 8px; }
-      .meet-actions { width: 100%; }
+      .meet-actions { width: 100%; gap: 6px; }
+      .meet-cta .lg { display: none; } .meet-cta .sm { display: inline; }
       .meet-cta { flex: 1 1 0; min-width: 0; text-align: center; padding: 8px 6px; font-size: min(3.3vw, 0.86rem); overflow: hidden; text-overflow: ellipsis; }
       .meet-cta.alt { padding: 6.5px 4.5px; }
     }
@@ -332,8 +334,9 @@
       <p>Thank you all for coming!</p>
     </div>
     <div class="meet-actions">
-      <a class="meet-cta" href="/upload/">Share your photos →</a>
-      <a class="meet-cta alt" href="/friends/">Friends Directory →</a>
+      <a class="meet-cta" href="/upload/"><span class="lg">Share your photos →</span><span class="sm">Share photos</span></a>
+      <a class="meet-cta alt" href="/friends/"><span class="lg">Friends Directory →</span><span class="sm">Directory</span></a>
+      <a class="meet-cta alt" href="/wishes/"><span class="lg">Wish your Friend →</span><span class="sm">Wish friends</span></a>
     </div>
   </section>
 

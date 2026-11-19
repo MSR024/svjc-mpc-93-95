@@ -44,6 +44,9 @@
       background: radial-gradient(120% 220% at 0% 0%, #b4541f 0%, transparent 55%), linear-gradient(90deg, #6e1424 0%, #8b1e2d 55%, #6e1424 100%); }
     #banner::after { content: ""; position: absolute; left: 0; right: 0; bottom: -7px; height: 8px; pointer-events: none;
       background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='8' viewBox='0 0 20 8'%3E%3Ccircle cx='5' cy='3.5' r='3.2' fill='%23f4b400'/%3E%3Ccircle cx='5' cy='3.5' r='1.3' fill='%23e8871e'/%3E%3Cpath d='M14 0 C11.5 2.5 12 5.5 14 8 C16 5.5 16.5 2.5 14 0Z' fill='%232e7d32'/%3E%3C/svg%3E") repeat-x; }
+    .home-btn { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 999px;
+      color: #fff; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.35); }
+    .home-btn:hover, .home-btn:focus-visible { background: rgba(255,255,255,.24); }
     .ev-date { background: linear-gradient(180deg, #fde68a, #f4b400); color: #5a1220; }
 
     #app { position: fixed; inset: var(--banner-h) 0 0 0; display: flex; }
@@ -97,6 +100,7 @@
 
   <!-- ===== Batch-meet banner ===== -->
   <header id="banner" class="fixed top-0 inset-x-0 z-[1000] flex items-center gap-2.5 md:gap-3 px-2.5 md:px-5 text-white" aria-label="Upcoming batch meet">
+    <a href="/" class="home-btn shrink-0" aria-label="Home" title="Home"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg></a>
     <div class="ev-date shrink-0 rounded-md md:rounded-lg w-[44px] md:w-[46px] text-center leading-none py-1 shadow-md">
       <span id="evDow" class="block text-[9px] font-bold tracking-wider uppercase"></span>
       <span id="evDay" class="block text-[19px] md:text-[20px] font-black"></span>
@@ -187,8 +191,12 @@
           <select name="profession" id="profSelect" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 bg-white"></select></label>
         <label class="block">What you do<input name="work" placeholder="e.g. Physics lecturer, runs a pharmacy" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2" /></label>
         <label class="block">City / town where you work or live *<input required name="city" placeholder="e.g. Karimnagar" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2" /></label>
+        <fieldset class="block"><legend>Birthday <span class="text-slate-500 text-xs">(optional · day and month only)</span></legend>
+          <div class="grid grid-cols-2 gap-2"><select name="bday_d" data-days aria-label="Birthday day" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 bg-white"></select><select name="bday_m" data-months aria-label="Birthday month" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 bg-white"></select></div></fieldset>
+        <fieldset class="block"><legend>Wedding anniversary <span class="text-slate-500 text-xs">(optional · day and month only)</span></legend>
+          <div class="grid grid-cols-2 gap-2"><select name="anniv_d" data-days aria-label="Anniversary day" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 bg-white"></select><select name="anniv_m" data-months aria-label="Anniversary month" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 bg-white"></select></div></fieldset>
         <label class="block">Anything else (corrections, photos, memories)<textarea name="notes" rows="2" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2"></textarea></label>
-        <label class="flex items-start gap-2 text-xs text-slate-600"><input type="checkbox" name="consent" required class="mt-0.5" />I agree to my name, profession and city being shown on this batch map.</label>
+        <label class="flex items-start gap-2 text-xs text-slate-600"><input type="checkbox" name="consent" required class="mt-0.5" />I agree to my name, profession, city and any dates I give being shown on this batch website.</label>
         <div class="grid grid-cols-2 gap-2 pt-1">
           <button type="submit" data-via="whatsapp" class="rounded-full bg-[#1f8f4e] text-white font-medium py-2.5 hover:bg-[#16733e]">Send on WhatsApp</button>
           <button type="submit" data-via="copy" class="rounded-full border border-slate-300 text-slate-700 font-medium py-2.5 hover:bg-slate-50">Copy details</button>
@@ -211,6 +219,6 @@
   </div>
 
   <script src="vendor/leaflet-1.9.4/leaflet.js"></script>
-  <script src="app.js?v=202610142343"></script>
+  <script src="app.js?v=2026111801"></script>
 </body>
 </html>

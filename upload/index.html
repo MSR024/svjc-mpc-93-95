@@ -64,10 +64,20 @@
     .closed { text-align: center; color: var(--muted); }
     footer { text-align: center; font-size: .75rem; color: var(--muted); margin-top: 18px; }
     footer a { color: var(--maroon); }
+
+    /* Home button: fixed under the toran; icon-only on phones so it never covers the heading. */
+    .home { position: fixed; z-index: 6; top: calc(36px + env(safe-area-inset-top)); left: max(12px, env(safe-area-inset-left));
+      display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px 0 10px; border-radius: 999px;
+      background: #fffdf8; color: #8b1e2d; border: 1.5px solid rgba(139,30,45,.55); font-weight: 700; font-size: .85rem; text-decoration: none;
+      box-shadow: 0 6px 16px -10px rgba(59,29,20,.6); }
+    .home:hover, .home:focus-visible { background: #fbedef; }
+    @media (max-width: 640px) { .home { width: 36px; padding: 0; justify-content: center; } .home span { display: none; } }
+    @media (max-width: 400px) { header { padding-top: 40px; } }   /* keep the heading clear of the Home button */
   </style>
 </head>
 <body>
   <div class="toran" aria-hidden="true"></div>
+  <a class="home" href="/" aria-label="Home"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg><span>Home</span></a>
   <main>
     <header>
       <span class="eyebrow">Shathavahana Junior College · 1993–95</span>
